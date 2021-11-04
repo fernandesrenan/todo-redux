@@ -1,4 +1,4 @@
-import "./App.css";
+import { useState } from "react";
 import {
   Button,
   Checkbox,
@@ -10,46 +10,49 @@ import {
   ListItemText,
   TextField,
 } from "@material-ui/core";
+import "./App.css";
 
 function App() {
+  const [inputText, setInputText] = useState("");
+
+  function handleClick() {
+  }
+
+  function handleChange(event) {
+    setInputText(event.target.value);
+  }
+
   return (
     <div className="App">
       <div className="action">
         <TextField
           id="outlined-basic"
-          label="Outlined"
+          label="TODO"
           variant="outlined"
           size="small"
+          value={inputText}
+          onChange={handleChange}
         />
-        <Button variant="contained" size="large">
+        <Button variant="contained" size="large" onClick={handleClick}>
           Add Todo
         </Button>
       </div>
       <Divider />
       <div className="list">
         <List sx={{ bgcolor: "background.paper" }}>
-          {[0, 1, 2, 3].map((value) => {
-            const labelId = `checkbox-list-label-${value}`;
-
+          {[].map((todo) => {
             return (
-              <ListItem key={value} disablePadding>
-                <ListItemButton
-                  // onClick={handleToggle(value)}
-                  dense
-                >
-                  <ListItemIcon>
+              <ListItem key={todo.id} disablePadding>
+                <ListItemButton onClick={() => {}} dense>
+                  {/* <ListItemIcon>
                     <Checkbox
                       edge="start"
-                      // checked={checked.indexOf(value) !== -1}
+                      // checked={}
                       tabIndex={-1}
                       disableRipple
-                      inputProps={{ "aria-labelledby": labelId }}
                     />
-                  </ListItemIcon>
-                  <ListItemText
-                    id={labelId}
-                    primary={`Line item ${value + 1}`}
-                  />
+                  </ListItemIcon> */}
+                  <ListItemText id={todo.id} primary={todo.text} />
                 </ListItemButton>
               </ListItem>
             );
