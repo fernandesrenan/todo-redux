@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo } from "./actions";
+import { addTodo, toggleTodo } from "./actions";
 
 function App() {
   const todos = useSelector((todos) => todos);
@@ -26,6 +26,10 @@ function App() {
 
   function handleChange(event) {
     setInputText(event.target.value);
+  }
+
+  function handleToggle(id) {
+    dispatch(toggleTodo(id));
   }
 
   return (
@@ -49,15 +53,15 @@ function App() {
           {todos.map((todo) => {
             return (
               <ListItem key={todo.id} disablePadding>
-                <ListItemButton onClick={() => {}} dense>
-                  {/* <ListItemIcon>
+                <ListItemButton onClick={() => handleToggle(todo.id)} dense>
+                  <ListItemIcon>
                     <Checkbox
                       edge="start"
-                      // checked={}
+                      checked={todo.checked}
                       tabIndex={-1}
                       disableRipple
                     />
-                  </ListItemIcon> */}
+                  </ListItemIcon>
                   <ListItemText id={todo.id} primary={todo.text} />
                 </ListItemButton>
               </ListItem>
