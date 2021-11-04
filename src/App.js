@@ -11,11 +11,17 @@ import {
   TextField,
 } from "@material-ui/core";
 import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { addTodo } from "./actions";
 
 function App() {
+  const todos = useSelector((todos) => todos);
+  const dispatch = useDispatch();
   const [inputText, setInputText] = useState("");
 
   function handleClick() {
+    dispatch(addTodo(inputText));
+    setInputText("");
   }
 
   function handleChange(event) {
@@ -40,7 +46,7 @@ function App() {
       <Divider />
       <div className="list">
         <List sx={{ bgcolor: "background.paper" }}>
-          {[].map((todo) => {
+          {todos.map((todo) => {
             return (
               <ListItem key={todo.id} disablePadding>
                 <ListItemButton onClick={() => {}} dense>

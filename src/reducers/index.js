@@ -1,10 +1,12 @@
-function reducer(state, action) {
-    switch (action.type) {
-        case '' /* ACTION TYPE */: 
-            return state /* UPDATED STATE */
-        default:
-            return state
-    }
+import { ADD_TODO } from "../actions";
+
+function reducer(state = [], action) {
+  switch (action.type) {
+    case ADD_TODO:
+      return [...state, action.payload];
+    default:
+      return state;
+  }
 }
 
-export default reducer
+export default reducer;
