@@ -12,10 +12,10 @@ import {
 } from "@material-ui/core";
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo, toggleTodo } from "./actions";
+import { addTodo, toggleTodo } from "./slices/todoSlice";
 
 function App() {
-  const todos = useSelector((todos) => todos);
+  const todos = useSelector((state) => state.todo);
   const dispatch = useDispatch();
   const [inputText, setInputText] = useState("");
 
