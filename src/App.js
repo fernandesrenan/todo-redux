@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   Button,
   Checkbox,
+  CircularProgress,
   Divider,
   List,
   ListItem,
@@ -15,7 +16,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { addTodo, toggleTodo } from "./slices/todoSlice";
 
 function App() {
-  const todos = useSelector((state) => state.todo);
+  const todos = useSelector((state) => state.todo.list);
+  const loading = useSelector((state) => state.todo.loading);
   const dispatch = useDispatch();
   const [inputText, setInputText] = useState("");
 
@@ -43,12 +45,22 @@ function App() {
           value={inputText}
           onChange={handleChange}
         />
-        <Button variant="contained" size="large" onClick={handleClick}>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={handleClick}
+          disabled={loading}
+        >
           Add Todo
         </Button>
       </div>
       <Divider />
       <div className="list">
+        {loading && (
+          <CircularProgress
+            style={{ padding: "8px", display: "block", margin: "0 auto" }}
+          />
+        )}
         <List sx={{ bgcolor: "background.paper" }}>
           {todos.map((todo) => {
             return (
